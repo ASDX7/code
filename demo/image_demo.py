@@ -8,15 +8,15 @@ from mmdet.apis import (async_inference_detector, inference_detector,
 
 def parse_args():
     parser = ArgumentParser()
-    parser.add_argument('img', help='Image file')
-    parser.add_argument('config', help='Config file')
-    parser.add_argument('checkpoint', help='Checkpoint file')
-    parser.add_argument('--out-file', default=None, help='Path to output file')
+    parser.add_argument('--img', default = 'data/foggy_cityscapes/leftImg8bit_foggy/val_for_paper/lindau/lindau_000014_000019_leftImg8bit_foggy_beta_0.02.png',help='Image file')
+    parser.add_argument('--config', default='configs/PE_yolo/PE_yolo.py', help='Config file')
+    parser.add_argument('--checkpoint', default = 'work_dirs/PE_yolo_2048/epoch_30.pth', help='Checkpoint file')
+    parser.add_argument('--out-file', default='/cpfs01/user/wangyudong/code/syf/mmdetection/a/lindau_000014_000019_leftImg8bit_foggy_beta_0.02.png', help='Path to output file')
     parser.add_argument(
         '--device', default='cuda:0', help='Device used for inference')
     parser.add_argument(
         '--palette',
-        default='coco',
+        default='citys',
         choices=['coco', 'voc', 'citys', 'random'],
         help='Color palette used for visualization')
     parser.add_argument(
@@ -57,7 +57,8 @@ async def async_main(args):
         result[0],
         palette=args.palette,
         score_thr=args.score_thr,
-        out_file=args.out_file)
+        out_file=args.out_file)   
+
 
 
 if __name__ == '__main__':

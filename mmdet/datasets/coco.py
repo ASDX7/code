@@ -389,7 +389,7 @@ class CocoDataset(CustomDataset):
                           coco_gt,
                           metrics,
                           logger=None,
-                          classwise=False,
+                          classwise=True,
                           proposal_nums=(100, 300, 1000),
                           iou_thrs=None,
                           metric_items=None):
@@ -594,7 +594,7 @@ class CocoDataset(CustomDataset):
                  metric='bbox',
                  logger=None,
                  jsonfile_prefix=None,
-                 classwise=False,
+                 classwise=True,
                  proposal_nums=(100, 300, 1000),
                  iou_thrs=None,
                  metric_items=None):
@@ -640,7 +640,7 @@ class CocoDataset(CustomDataset):
 
         result_files, tmp_dir = self.format_results(results, jsonfile_prefix)
         eval_results = self.evaluate_det_segm(results, result_files, coco_gt,
-                                              metrics, logger, classwise,
+                                              metrics, logger, True,
                                               proposal_nums, iou_thrs,
                                               metric_items)
 

@@ -24,10 +24,17 @@ from mmdet.utils import (build_ddp, build_dp, compat_cfg, get_device,
 def parse_args():
     parser = argparse.ArgumentParser(
         description='MMDet test (and eval) a model')
-    parser.add_argument('config', help='test config file path')
-    parser.add_argument('checkpoint', help='checkpoint file')
+    parser.add_argument(
+        '--config', 
+        default='configs/PE_yolo/PE_yolo.py',
+        help='test config file path')
+    parser.add_argument(
+        '--checkpoint', 
+        default='work_dirs/PE_yolo_2048/epoch_30.pth',
+        help='checkpoint file')
     parser.add_argument(
         '--work-dir',
+        default='work_dirs/1',
         help='the directory to save the file containing evaluation metrics')
     parser.add_argument('--out', help='output result file in pickle format')
     parser.add_argument(
@@ -55,6 +62,7 @@ def parse_args():
         'submit it to the test server')
     parser.add_argument(
         '--eval',
+        default='bbox',
         type=str,
         nargs='+',
         help='evaluation metrics, which depends on the dataset, e.g., "bbox",'

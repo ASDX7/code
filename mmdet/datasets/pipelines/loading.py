@@ -63,7 +63,8 @@ class LoadImageFromFile:
                                 results['img_info']['filename'])
         else:
             filename = results['img_info']['filename']
-
+        
+        # filename = filename[0:-4] + '_foggy_beta_0.02' + filename[-4:]  # 添加
         img_bytes = self.file_client.get(filename)
         img = mmcv.imfrombytes(
             img_bytes, flag=self.color_type, channel_order=self.channel_order)

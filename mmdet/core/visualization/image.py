@@ -104,7 +104,7 @@ def draw_bboxes(ax, bboxes, color='g', alpha=0.8, thickness=2):
         polygons,
         facecolor='none',
         edgecolors=color,
-        linewidths=thickness,
+        linewidths=4,   #thickness,
         alpha=alpha)
     ax.add_collection(p)
 
@@ -119,7 +119,8 @@ def draw_labels(ax,
                 color='w',
                 font_size=8,
                 scales=None,
-                horizontal_alignment='left'):
+                horizontal_alignment='left',
+                box_color=None):
     """Draw labels on the axes.
 
     Args:
@@ -150,8 +151,8 @@ def draw_labels(ax,
             pos[1],
             f'{label_text}',
             bbox={
-                'facecolor': 'black',
-                'alpha': 0.8,
+                'facecolor': box_color[i],
+                'alpha': 0.5,
                 'pad': 0.7,
                 'edgecolor': 'none'
             },
@@ -214,8 +215,8 @@ def imshow_det_bboxes(img,
                       bbox_color='green',
                       text_color='green',
                       mask_color=None,
-                      thickness=2,
-                      font_size=8,
+                      thickness=4,
+                      font_size=20,
                       win_name='',
                       show=True,
                       wait_time=0,
@@ -301,7 +302,7 @@ def imshow_det_bboxes(img,
         num_bboxes = bboxes.shape[0]
         bbox_palette = palette_val(get_palette(bbox_color, max_label + 1))
         colors = [bbox_palette[label] for label in labels[:num_bboxes]]
-        draw_bboxes(ax, bboxes, colors, alpha=0.8, thickness=thickness)
+        draw_bboxes(ax, bboxes, colors, alpha=1.0, thickness=thickness)
 
         horizontal_alignment = 'left'
         positions = bboxes[:, :2].astype(np.int32) + thickness
@@ -315,9 +316,10 @@ def imshow_det_bboxes(img,
             scores=scores,
             class_names=class_names,
             color=text_colors,
-            font_size=font_size,
+            font_size=20,      # 
             scales=scales,
-            horizontal_alignment=horizontal_alignment)
+            horizontal_alignment=horizontal_alignment,
+            box_color=colors)
 
     if segms is not None:
         mask_palette = get_palette(mask_color, max_label + 1)
